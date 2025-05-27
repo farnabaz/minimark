@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { stringify } from '../src'
+import { stringify } from '../src/stringify'
 import { getAST } from './utils'
 
 describe.skip('stringify', async () => {
