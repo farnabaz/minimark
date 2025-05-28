@@ -1,13 +1,14 @@
 import type { State, MinimarkElement } from "../types"
 import { htmlAttributes, indent, text } from "../utils"
 
-const selfCloseTags = ['br', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr']
+const textBlocks = new Set(['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'])
+const selfCloseTags = new Set(['br', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr'])
 
 export function html(node: MinimarkElement, state: State, parent?: MinimarkElement) {
   const [tag, attributes, ...children] = cleanup(node)
 
-  const inline = parent?.[0] === 'p' && children.every(child => typeof child === 'string')
-  const isSelfClose = selfCloseTags.includes(tag as string)
+  const inline = textBlocks.has(String(parent?.[0])) && children.every(child => typeof child === 'string')
+  const isSelfClose = selfCloseTags.has(String(tag))
 
   // Do not modify context if we are already in html mode
   const revert = !state.context.html ? state.applyContext({ html: true }) : null
@@ -22,7 +23,7 @@ export function html(node: MinimarkElement, state: State, parent?: MinimarkEleme
     ? ` ${htmlAttributes(attributes)}` 
     : ''
 
-  if (selfCloseTags.includes(tag as string)) {
+  if (isSelfClose) {
     return `<${tag}${attrs} />` + (inline ? '' : state.context.blockSeparator)
   }
 
