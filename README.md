@@ -47,7 +47,7 @@ yarn add minimark
 ## Usage
 
 ```js
-import { stringify } from 'minimark';
+import { stringify } from 'minimark/stringify';
 
 const ast = [
   type: 'minimal',
