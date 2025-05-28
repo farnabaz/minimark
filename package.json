@@ -1,41 +1,41 @@
 {
-	"name": "minimark",
-	"version": "0.0.3",
+  "name": "minimark",
+  "type": "module",
+  "version": "0.0.3",
+  "packageManager": "pnpm@9.15.9+sha512.68046141893c66fad01c079231128e9afb89ef87e2691d69e4d40eee228988295fd4682181bae55b58418c3a253bde65a505ec7c5f9403ece5cc3cd37dcf2531",
+  "description": "MiniMark is a minimal representation of Abstract Syntax Trees (AST)",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/farnabaz/minimark.git"
   },
-  "license": "MIT",
-	"type": "module",
-	"description": "MiniMark is a minimal representation of Abstract Syntax Trees (AST)",
-	"scripts": {
-		"dev": "vitest",
-		"prepack": "obuild",
-		"lint": "eslint .",
-		"test": "vitest run",
-		"test:watch": "vitest watch",
-		"test:types": "vue-tsc --noEmit",
-		"verify": "npm run lint && npm run test",
-		"release": "release-it"
-	},
-	"devDependencies": {
-		"@nuxt/content": "^3.5.1",
-		"@nuxt/eslint-config": "^1.4.1",
-		"@nuxtjs/mdc": "^0.17.0",
-		"@release-it/conventional-changelog": "^10.0.1",
-		"eslint": "^9.27.0",
-		"obuild": "^0.2.0",
-		"tslib": "^2.8.1",
-		"vitest": "^3.1.4"
-	},
-	"files": [
-		"dist"
-	],
-	"exports": {
-		".": "./dist/index.mjs"
-	},
-	"packageManager": "pnpm@9.15.9+sha512.68046141893c66fad01c079231128e9afb89ef87e2691d69e4d40eee228988295fd4682181bae55b58418c3a253bde65a505ec7c5f9403ece5cc3cd37dcf2531",
-	"dependencies": {
-		"release-it": "^19.0.2"
-	}
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./hast": "./dist/hast.mjs",
+    "./stringify": "./dist/stringify.mjs",
+    "./visit": "./dist/visit.mjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vitest",
+    "prepack": "obuild",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "test:types": "vue-tsc --noEmit",
+    "verify": "npm run lint && npm run test",
+    "release": "release-it"
+  },
+  "devDependencies": {
+    "@nuxt/eslint-config": "^1.4.1",
+    "@nuxtjs/mdc": "^0.17.0",
+    "@release-it/conventional-changelog": "^10.0.1",
+    "eslint": "^9.27.0",
+    "obuild": "^0.2.0",
+    "release-it": "^19.0.2",
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.4"
+  }
 }

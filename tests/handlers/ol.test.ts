@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { ol } from '../../src/handlers/ol'
 import type { MinimarkElement } from '../../src/types'
-import { state } from '../../src/state'
+import { state } from '../../src/utils/state'
 
 describe('ol handler', () => {
   it('should return an ordered list', () => {

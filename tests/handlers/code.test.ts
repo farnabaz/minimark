@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { code } from '../../src/handlers/code'
 import type { MinimarkElement } from '../../src/types'
-import { state } from '../../src/state'
+import { state } from '../../src/utils/state'
 
 describe('code handler', () => {
   it('should return a code block', () => {

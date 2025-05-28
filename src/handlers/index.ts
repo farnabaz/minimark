@@ -36,5 +36,5 @@ export const handlers = {
   blockquote,
   img,
   del,
-  mdc
+  mdc,
 }

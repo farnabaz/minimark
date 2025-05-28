@@ -1,5 +1,5 @@
-import { handlers } from "./handlers"
-import type { State, MinimarkElement, MinimarkNode } from "./types"
+import { handlers } from '../handlers'
+import type { State, MinimarkElement, MinimarkNode, Context } from '../types'
 
 export function one(node: MinimarkNode, state: State, parent?: MinimarkElement) {
   if (typeof node === 'string') {
@@ -10,7 +10,7 @@ export function one(node: MinimarkNode, state: State, parent?: MinimarkElement) 
     return state.handlers.html(node, state, parent)
   }
 
-  let nodeHandler = state.context.handlers?.[node[0]] || state.handlers[node[0]]
+  const nodeHandler = state.context.handlers[node[0] as string] || state.handlers[node[0] as string]
   if (nodeHandler) {
     return nodeHandler(node, state, parent)
   }
@@ -25,40 +25,39 @@ export function flow(node: MinimarkElement, state: State, parent?: MinimarkEleme
 
   let result = ''
   for (const child of children) {
-    result += one(child, state, node)
+    result += one(child, state, parent || node)
   }
-  
+
   return result
 }
 
-export function createState(ctx: Record<string, any> = {}): State {
+export function createState(ctx: Record<string, unknown> = {}): State {
   const context = {
     blockSeparator: '\n\n',
     format: 'markdown/mdc',
     handlers: {}, // user defined node handlers
     ...ctx,
     // Enable html mode for text/html format
-    html: ctx.format === 'text/html'
-  } as Record<string, any>
-  
+    html: ctx.format === 'text/html',
+  } as Context
+
   return {
     handlers,
     context,
     flow,
     one,
-    applyContext: (edit: Record<string, any>) => {
-      const revert = {} as Record<string, any>
-  
+    applyContext: (edit: Record<string, unknown>) => {
+      const revert = {} as Record<string, unknown>
+
       for (const [key, value] of Object.entries(edit)) {
         revert[key] = context[key]
         context[key] = value
       }
-  
+
       return revert
-    }
+    },
   }
 }
-
 
 export const state: State = {
   handlers,
@@ -69,8 +68,8 @@ export const state: State = {
   },
   flow,
   one,
-  applyContext: (edit: Record<string, any>) => {
-    const revert = {} as Record<string, any>
+  applyContext: (edit: Record<string, unknown>) => {
+    const revert = {} as Record<string, unknown>
 
     for (const [key, value] of Object.entries(edit)) {
       revert[key] = state.context[key]
@@ -78,5 +77,5 @@ export const state: State = {
     }
 
     return revert
-  }
+  },
 }

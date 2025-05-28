@@ -1,6 +1,6 @@
-import type { State, MinimarkElement } from "../types"
-import { text } from "../utils"
+import type { State, MinimarkElement } from '../types'
+import { textContent } from '../utils'
 
 export function code(node: MinimarkElement, _: State) {
-  return `\`${text(node)}\``
+  return `\`${textContent(node)}\``
 }

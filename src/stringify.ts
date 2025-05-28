@@ -1,9 +1,9 @@
-import { createState, one } from "./state"
-import { StringifyOptions, MinimarkTree } from "./types"
+import { createState, one } from './utils/state'
+import type { StringifyOptions, MinimarkTree } from './types'
 
 const defaultOptions: Partial<StringifyOptions> = {
   format: 'markdown/mdc',
-  removeLastStyle: true
+  removeLastStyle: true,
 }
 
 export function stringify(node: MinimarkTree, options: Partial<StringifyOptions> = {}) {

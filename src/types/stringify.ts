@@ -1,19 +1,19 @@
-import type { MinimarkElement, MinimarkNode } from "./tree"
+import type { MinimarkElement, MinimarkNode } from './tree'
 
 export interface StringifyOptions {
   /**
    * @default '\n\n'
    */
-  blockSeparator: string,
+  blockSeparator: string
 
   /**
    * @default 'markdown/mdc'
    */
-  format: 'markdown/mdc' | 'markdown/html' | 'text/html',
+  format: 'markdown/mdc' | 'markdown/html' | 'text/html'
   /**
    * user defined node handlers
    */
-  handlers: Record<string, NodeHandler>,
+  handlers: Record<string, NodeHandler>
 
   /**
    * @default true
@@ -39,13 +39,13 @@ export interface Context extends StringifyOptions {
    */
   order?: number
 
-  [key: string]: any
+  [key: string]: unknown
 }
 
 export type State = {
-  handlers: Record<string, NodeHandler>,
-  context: Record<string, any>,
-  flow: NodeHandler,
-  one: (node: MinimarkNode, state: State, parent?: MinimarkElement) => string,
-  applyContext: (edit: Record<string, any>) => Record<string, any>
+  handlers: Record<string, NodeHandler>
+  context: Context
+  flow: NodeHandler
+  one: (node: MinimarkNode, state: State, parent?: MinimarkElement) => string
+  applyContext: (edit: Record<string, unknown>) => Record<string, unknown>
 }

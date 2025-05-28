@@ -11,8 +11,8 @@ export default createConfigForNuxt({
   },
   dirs: {
     src: [
-      './playground',
-      './examples/blog',
+      './src',
+      './tests',
     ],
   },
 })

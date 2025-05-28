@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { a } from '../../src/handlers/a'
 import type { MinimarkElement } from '../../src/types'
-import { state } from '../../src/state'
+import { state } from '../../src/utils/state'
 
 describe('a handler', () => {
   it('should return a link', () => {

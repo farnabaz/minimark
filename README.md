@@ -2,6 +2,38 @@
 
 MiniMark is a minimal representation of Abstract Syntax Trees (AST) for Markdown.
 
+Minimark takes advantage of JSON array format to reduce the size of the AST.
+
+The difference between a normal AST and a minimark AST is visible in the example below. 
+A normal AST is like this:
+```json
+{
+  "type": "root",
+  "children": [
+    {
+      "type": "heading",
+      "depth": 2,
+      "children": [
+        {
+          "type": "text",
+          "value": "Documentations"
+        }
+      ]
+    }
+  ]
+}
+```
+
+But with minimark, it's like this:
+```json
+{
+  "type": "minimark",
+  "value": [
+    ["h2", {}, "Documentations"]
+  ]
+}
+```
+
 ## Installation
 
 ```bash

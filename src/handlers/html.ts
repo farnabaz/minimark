@@ -1,5 +1,5 @@
-import type { State, MinimarkElement } from "../types"
-import { htmlAttributes, indent, text } from "../utils"
+import type { State, MinimarkElement } from '../types'
+import { htmlAttributes, indent, textContent } from '../utils'
 
 const textBlocks = new Set(['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li'])
 const selfCloseTags = new Set(['br', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr'])
@@ -18,10 +18,12 @@ export function html(node: MinimarkElement, state: State, parent?: MinimarkEleme
     .join('').trim()
 
   // Revert, only if we modified the context
-  revert && state.applyContext(revert)
+  if (revert) {
+    state.applyContext(revert)
+  }
 
-  const attrs = Object.keys(attributes).length > 0 
-    ? ` ${htmlAttributes(attributes)}` 
+  const attrs = Object.keys(attributes).length > 0
+    ? ` ${htmlAttributes(attributes)}`
     : ''
 
   if (isSelfClose) {
@@ -46,7 +48,7 @@ function paddNoneHtmlContent(content: string, state: State) {
 }
 
 function cleanup(node: MinimarkElement): MinimarkElement {
-  const [tag, attributes, ...children] = node
+  const [tag, attributes] = node
 
   if (tag === 'pre') {
     return [
@@ -54,10 +56,9 @@ function cleanup(node: MinimarkElement): MinimarkElement {
       {
         language: attributes.language,
       },
-      attributes.code || text(node)
+      attributes.code || textContent(node),
     ] as unknown as MinimarkElement
   }
-  
 
   return node
 }

@@ -52,7 +52,7 @@ This is another paragraph.
 
 ```markdown
 > This is a blockquote.
-> 
+>
 > - Nested list
 > - In blockquote
 ```
@@ -60,7 +60,7 @@ This is another paragraph.
 **Preview:**
 
 > This is a blockquote.
-> 
+>
 > - Nested list
 > - In blockquote
 
@@ -229,4 +229,3 @@ Here is a footnote reference,[^1]
 Here is a footnote reference,[^1]
 
 [^1]: Here is the footnote.
-

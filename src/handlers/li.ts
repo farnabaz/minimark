@@ -1,7 +1,7 @@
-import type { State, MinimarkElement, MinimarkNode } from "../types"
+import type { State, MinimarkElement, MinimarkNode } from '../types'
 
 export function li(node: MinimarkElement, state: State) {
-  let children = node.slice(2) as MinimarkNode[]
+  const children = node.slice(2) as MinimarkNode[]
 
   const order = state.context.order
   let prefix = order ? `${order}. ` : '- '
@@ -11,7 +11,7 @@ export function li(node: MinimarkElement, state: State) {
     : String(node[1].className)
 
   const taskList = className.includes('task-list-item')
-  
+
   if (taskList) {
     const input = children.shift() as MinimarkElement
     prefix += input[1].checked ? '[x] ' : '[ ] '

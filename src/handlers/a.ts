@@ -1,4 +1,4 @@
-import type { State, MinimarkElement } from "../types"
+import type { State, MinimarkElement } from '../types'
 
 // TODO: support title & attributes
 export function a(node: MinimarkElement, state: State) {

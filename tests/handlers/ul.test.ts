@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { ul } from '../../src/handlers/ul'
 import type { MinimarkElement } from '../../src/types'
-import { state } from '../../src/state'
+import { state } from '../../src/utils/state'
 
 describe('ul handler', () => {
   it('should return a list', () => {

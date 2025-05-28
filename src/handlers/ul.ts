@@ -1,5 +1,5 @@
-import type { State, MinimarkElement, MinimarkNode } from "../types"
-import { indent } from "../utils"
+import type { State, MinimarkElement, MinimarkNode } from '../types'
+import { indent } from '../utils'
 
 export function ul(node: MinimarkElement, state: State) {
   const children = node.slice(2) as MinimarkNode[]
@@ -11,7 +11,8 @@ export function ul(node: MinimarkElement, state: State) {
 
   if (revert.list) {
     result = '\n' + indent(result)
-  } else {
+  }
+  else {
     result = result + state.context.blockSeparator
   }
 

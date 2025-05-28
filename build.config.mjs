@@ -6,6 +6,14 @@ export default defineBuildConfig({
       type: 'bundle',
       input: ['./src/index.ts'],
     },
+    {
+      type: 'bundle',
+      input: ['./src/hast.ts'],
+    },
+    {
+      type: 'bundle',
+      input: ['./src/stringify.ts'],
+    },
   ],
   hooks: {
     // start: (ctx) => {},

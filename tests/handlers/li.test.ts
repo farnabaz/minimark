@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { li } from '../../src/handlers/li'
 import type { MinimarkElement } from '../../src/types'
-import { state } from '../../src/state'
+import { state } from '../../src/utils/state'
 
 describe('li handler', () => {
   it('should return a list item', () => {
@@ -13,6 +13,4 @@ describe('li handler', () => {
     const node: MinimarkElement = ['li', { className: 'task-list-item' }, ['input', { type: 'checkbox', checked: true }], 'Hello']
     expect(li(node, state)).toBe('- [x] Hello\n')
   })
-
-
 })

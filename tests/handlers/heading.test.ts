@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { heading } from '../../src/handlers/heading'
 import type { MinimarkElement } from '../../src/types'
-import { state } from '../../src/state'
+import { state } from '../../src/utils/state'
 
 describe('heading handler', () => {
   it('should return h1', () => {
