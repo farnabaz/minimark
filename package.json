@@ -1,8 +1,12 @@
 {
 	"name": "minimark",
-	"version": "0.0.1",
+	"version": "0.0.3",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/farnabaz/minimark.git"
+  },
+  "license": "MIT",
 	"type": "module",
-	"license": "MIT",
 	"description": "MiniMark is a minimal representation of Abstract Syntax Trees (AST)",
 	"scripts": {
 		"dev": "vitest",

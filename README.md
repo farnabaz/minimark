@@ -1,17 +1,13 @@
 # minimark
 
-A utility for converting Abstract Syntax Trees (AST) into string representations.
-
-## Features
-
-- Converts AST nodes to readable strings
-- Supports various AST formats
-- Easy to use and extend
+MiniMark is a minimal representation of Abstract Syntax Trees (AST) for Markdown.
 
 ## Installation
 
 ```bash
 npm install minimark
+# or
+pnpm add minimark
 # or
 yarn add minimark
 ```
