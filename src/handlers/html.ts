@@ -1,8 +1,9 @@
 import type { State, MinimarkElement } from "../types"
 import { htmlAttributes, indent, text } from "../utils"
 
-const textBlocks = new Set(['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'])
+const textBlocks = new Set(['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li'])
 const selfCloseTags = new Set(['br', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr'])
+const fullHtmlTags = new Set(['table'])
 
 export function html(node: MinimarkElement, state: State, parent?: MinimarkElement) {
   const [tag, attributes, ...children] = cleanup(node)
@@ -11,7 +12,7 @@ export function html(node: MinimarkElement, state: State, parent?: MinimarkEleme
   const isSelfClose = selfCloseTags.has(String(tag))
 
   // Do not modify context if we are already in html mode
-  const revert = !state.context.html ? state.applyContext({ html: true }) : null
+  const revert = !state.context.html && fullHtmlTags.has(String(tag)) ? state.applyContext({ html: true }) : null
 
   const content = children.map(child => state.one(child, state, node))
     .join('').trim()
@@ -29,7 +30,19 @@ export function html(node: MinimarkElement, state: State, parent?: MinimarkEleme
 
   return inline
     ? `<${tag}${attrs}>${content}</${tag}>`
-    : `<${tag}${attrs}>\n${indent(content)}\n</${tag}>` + state.context.blockSeparator
+    : `<${tag}${attrs}>\n${paddNoneHtmlContent(content, state)}\n</${tag}>` + state.context.blockSeparator
+}
+
+function paddNoneHtmlContent(content: string, state: State) {
+  if (state.context.html) {
+    return indent(content)
+  }
+
+  return (
+    (content.trim().startsWith('<') ? '' : '\n')
+    + content
+    + (content.trim().endsWith('>') ? '' : '\n')
+  )
 }
 
 function cleanup(node: MinimarkElement): MinimarkElement {
