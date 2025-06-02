@@ -10,10 +10,10 @@ interface HastNode {
 
 // -- to minimark
 
-export function hastToMinimark(input: { type: 'root', children: HastNode[] }): MinimarkTree {
+export function fromHast(tree: { type: 'root', children: HastNode[] }): MinimarkTree {
   return {
     type: 'minimark',
-    value: input.children.map(hastToMinimarkNode).filter(v => v !== undefined) as MinimarkNode[],
+    value: tree.children.map(hastToMinimarkNode).filter(v => v !== undefined) as MinimarkNode[],
   }
 }
 
@@ -40,10 +40,10 @@ function hastToMinimarkNode(input: HastNode): MinimarkNode | undefined {
 
 // -- to hast
 
-export function minimarkToHast(input: MinimarkTree): { type: 'root', children: HastNode[] } {
+export function toHast(tree: MinimarkTree): { type: 'root', children: HastNode[] } {
   return {
     type: 'root',
-    children: input.value.map(minimarkToHastNode),
+    children: tree.value.map(minimarkToHastNode),
   }
 }
 

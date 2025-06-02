@@ -70,14 +70,83 @@ console.log(stringify(ast));
 
 ## API
 
-### `stringify(node, options?)`
 
-- `node`: The AST node to stringify.
-- `options`: (Optional) Configuration options.
+### `visit(tree, predicate, callback)`
+
+- `tree`: The minimark tree to visit.
+- `predicate`: A function that returns a boolean indicating whether the node should be visited.
+- `callback`: A function that will be called with the node and its children.
+
+```ts
+import { visit } from 'minimark';
+
+const ast = [
+  type: 'minimal',
+  value: [
+    ['h2', { id: 'documentations' }, '🎨 Documentations'], // ...
+  ],
+];
+
+visit(ast, (node) => node[0] === 'h2', (node) => {
+  console.log(node);
+});
+```
+
+### `textContent(node)`
+
+- `node`: The AST node to get the text content of.
+
+```ts
+import { textContent } from 'minimark';
+const ast = [
+  type: 'minimal',
+  value: [
+    ['h2', { id: 'documentations' }, '🎨 Documentations'], // ...
+  ],
+];
+
+console.log(textContent(ast.value[0])); // "🎨 Documentations"
+```
+
+### `toHast(tree)`
+
+- `tree`: The Minimark tree to convert to hast.
+
+```ts
+import { toHast } from 'minimark/hast';
+
+const ast = [
+  type: 'minimal',
+  value: [
+    ['h2', { id: 'documentations' }, '🎨 Documentations'], // ...
+  ],
+];
+
+const hast = toHast(ast);
+console.log(hast);
+```
+
+### `fromHast(tree)`
+
+- `tree`: The hast tree to convert to minimark.
+
+```ts
+
+const hast = {
+  type: 'root',
+  children: [
+    { type: 'element', tag: 'h2', props: { id: 'documentations' }, children: [{ type: 'text', value: '🎨 Documentations' }] },
+  ],
+};
+
+const minimark = fromHast(hast);
+console.log(minimark);
+```
+
 
 ## Contributing
 
-Contributions are welcome! Please open issues or submit pull requests.
+Contributions are welcome! Please open issues and submit pull requests.
 
 ## License
 
