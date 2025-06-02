@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.1](https://github.com/farnabaz/minimark/compare/v0.1.0...v0.1.1) (2025-06-02)
+
+### Bug Fixes
+
+* block elements inside li ([b52567a](https://github.com/farnabaz/minimark/commit/b52567aa6a8113658650cdce3397ec7118c17e6b))
+
 ## 0.1.0 (2025-05-28)
 
 ### Features
