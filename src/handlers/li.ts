@@ -17,7 +17,7 @@ export function li(node: MinimarkElement, state: State) {
     prefix += input[1].checked ? '[x] ' : '[ ] '
   }
 
-  const result = children.map(child => state.one(child, state).trimEnd()).join('').trim()
+  const result = children.map(child => state.one(child, state)).join('').trim()
 
   if (order) {
     state.applyContext({ order: order + 1 })

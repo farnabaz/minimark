@@ -12,8 +12,7 @@
   "exports": {
     ".": "./dist/index.mjs",
     "./hast": "./dist/hast.mjs",
-    "./stringify": "./dist/stringify.mjs",
-    "./visit": "./dist/visit.mjs"
+    "./stringify": "./dist/stringify.mjs"
   },
   "files": [
     "dist"

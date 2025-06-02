@@ -1,7 +1,12 @@
 import type { MinimarkNode } from '../types'
 
-export function indent(text: string) {
-  return text.split('\n').map(line => '  ' + line).join('\n')
+export function indent(text: string, { ignoreFirstLine = false }: { ignoreFirstLine?: boolean } = {}) {
+  return text.split('\n').map((line, index) => {
+    if (ignoreFirstLine && index === 0) {
+      return line
+    }
+    return '  ' + line
+  }).join('\n')
 }
 
 export function textContent(node: MinimarkNode): string {

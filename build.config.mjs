@@ -15,11 +15,4 @@ export default defineBuildConfig({
       input: ['./src/stringify.ts'],
     },
   ],
-  hooks: {
-    // start: (ctx) => {},
-    // end: (ctx) => {},
-    // entries: (entries, ctx) => {},
-    // rolldownConfig: (config, ctx) => {},
-    // rolldownOutput: (output, res, ctx) => {},
-  },
 })
