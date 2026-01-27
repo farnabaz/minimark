@@ -16,6 +16,7 @@ import { del } from './del'
 import { mdc } from './mdc'
 import { br } from './br'
 import { template } from './template'
+import { table, thead, tbody, tr, th, td } from './table'
 
 export const handlers = {
   code,
@@ -41,4 +42,10 @@ export const handlers = {
   del,
   mdc,
   template,
+  table,
+  thead,
+  tbody,
+  tr,
+  th,
+  td,
 }

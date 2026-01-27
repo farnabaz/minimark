@@ -1,11 +1,11 @@
 import type { State, MinimarkElement } from '../types'
 import { htmlAttributes, indent } from '../utils'
 
-const textBlocks = new Set(['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li'])
+const textBlocks = new Set(['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li', 'td', 'th'])
 const selfCloseTags = new Set(['br', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr'])
-const fullHtmlTags = new Set(['table'])
+const fullHtmlTags = new Set<string>([])
 const inlineTags = new Set(['strong', 'em', 'code', 'a', 'br', 'span', 'img'])
-const blockTags = new Set(['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li', 'ul', 'ol', 'blockquote', 'hr', 'table'])
+const blockTags = new Set(['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li', 'ul', 'ol', 'blockquote', 'hr', 'table', 'td', 'th'])
 
 export function html(node: MinimarkElement, state: State, parent?: MinimarkElement) {
   const [tag, attributes, ...children] = node

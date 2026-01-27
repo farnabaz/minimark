@@ -61,4 +61,66 @@ World [Google](https://www.google.com)
 Hello \`world\`
 `)
   })
+
+  // Table
+  it('should stringify a table', () => {
+    const tree: MinimarkTree = {
+      type: 'minimark',
+      value: [
+        [
+          'table',
+          {},
+          ['thead', {}, ['tr', {}, ['th', {}, 'Name'], ['th', {}, 'Age'], ['th', {}, 'City']]],
+          [
+            'tbody',
+            {},
+            ['tr', {}, ['td', {}, 'John'], ['td', {}, '25'], ['td', {}, 'NYC']],
+            ['tr', {}, ['td', {}, 'Jane'], ['td', {}, '30'], ['td', {}, 'Los Angeles']],
+            ['tr', {}, ['td', {}, 'Bob'], ['td', {}, '35'], ['td', {}, 'SF']],
+          ],
+        ],
+      ],
+    }
+    expect(stringify(tree)).toBe(`| Name | Age | City        |
+| ---- | --- | ----------- |
+| John | 25  | NYC         |
+| Jane | 30  | Los Angeles |
+| Bob  | 35  | SF          |
+`)
+  })
+
+  // Table with alignment
+  it('should stringify a table with alignment', () => {
+    const tree: MinimarkTree = {
+      type: 'minimark',
+      value: [
+        [
+          'table',
+          {},
+          [
+            'thead',
+            {},
+            [
+              'tr',
+              {},
+              ['th', { style: 'text-align:left' }, 'Left-aligned'],
+              ['th', { style: 'text-align:center' }, 'Center-aligned'],
+              ['th', { style: 'text-align:right' }, 'Right-aligned'],
+            ],
+          ],
+          [
+            'tbody',
+            {},
+            ['tr', {}, ['td', {}, 'git status'], ['td', {}, 'git status'], ['td', {}, 'git status']],
+            ['tr', {}, ['td', {}, 'git diff'], ['td', {}, 'git diff'], ['td', {}, 'git diff']],
+          ],
+        ],
+      ],
+    }
+    expect(stringify(tree)).toBe(`| Left-aligned | Center-aligned | Right-aligned |
+| :----------- | :------------: | ------------: |
+| git status   | git status     | git status    |
+| git diff     | git diff       | git diff      |
+`)
+  })
 })
