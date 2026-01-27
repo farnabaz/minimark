@@ -9,6 +9,9 @@ export type MinimarkTree = {
   value: MinimarkNode[]
 }
 
+/**
+ * @deprecated Use MinimarkTree instead
+ */
 export type MinimalTree = {
   type: 'minimal'
   value: MinimarkNode[]

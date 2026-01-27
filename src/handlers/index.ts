@@ -14,11 +14,14 @@ import { blockquote } from './blockquote'
 import { img } from './img'
 import { del } from './del'
 import { mdc } from './mdc'
+import { br } from './br'
+import { template } from './template'
 
 export const handlers = {
   code,
   pre,
   hr,
+  br,
   h1: heading,
   h2: heading,
   h3: heading,
@@ -37,4 +40,5 @@ export const handlers = {
   img,
   del,
   mdc,
+  template,
 }

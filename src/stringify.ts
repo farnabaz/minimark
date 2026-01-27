@@ -7,7 +7,11 @@ const defaultOptions: Partial<StringifyOptions> = {
 }
 
 export function stringify(node: MinimarkTree, options: Partial<StringifyOptions> = {}) {
-  options = { ...defaultOptions, ...options }
+  options = {
+    blockSeparator: options.format === 'text/html' ? '\n' : '\n\n',
+    ...defaultOptions,
+    ...options,
+  }
 
   const _state = createState(options)
 

@@ -2,7 +2,7 @@
   "name": "minimark",
   "type": "module",
   "version": "0.2.0",
-  "packageManager": "pnpm@10.11.0",
+  "packageManager": "pnpm@10.28.2",
   "description": "MiniMark is a minimal representation of Abstract Syntax Trees (AST)",
   "license": "MIT",
   "repository": {
@@ -28,13 +28,17 @@
     "release": "release-it"
   },
   "devDependencies": {
-    "@nuxt/eslint-config": "^1.4.1",
-    "@nuxtjs/mdc": "^0.17.0",
-    "@release-it/conventional-changelog": "^10.0.1",
-    "eslint": "^9.28.0",
-    "obuild": "^0.2.1",
-    "release-it": "^19.0.3",
-    "typescript": "^5.8.3",
-    "vitest": "^3.2.0"
+    "@nuxt/eslint-config": "^1.13.0",
+    "@nuxtjs/mdc": "^0.20.0",
+    "@release-it/conventional-changelog": "^10.0.4",
+    "@types/js-yaml": "^4.0.9",
+    "eslint": "^9.39.2",
+    "obuild": "^0.4.20",
+    "release-it": "^19.2.4",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.1"
   }
 }

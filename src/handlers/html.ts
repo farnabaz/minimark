@@ -1,21 +1,55 @@
 import type { State, MinimarkElement } from '../types'
-import { htmlAttributes, indent, textContent } from '../utils'
+import { htmlAttributes, indent } from '../utils'
 
 const textBlocks = new Set(['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li'])
 const selfCloseTags = new Set(['br', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr'])
 const fullHtmlTags = new Set(['table'])
+const inlineTags = new Set(['strong', 'em', 'code', 'a', 'br', 'span', 'img'])
+const blockTags = new Set(['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li', 'ul', 'ol', 'blockquote', 'hr', 'table'])
 
 export function html(node: MinimarkElement, state: State, parent?: MinimarkElement) {
-  const [tag, attributes, ...children] = cleanup(node)
+  const [tag, attributes, ...children] = node
 
-  const inline = textBlocks.has(String(parent?.[0])) && children.every(child => typeof child === 'string')
+  const hasOnlyTextChildren = children.every(child => typeof child === 'string' || inlineTags.has(String(child?.[0])))
+  const hasTextSibling = children.some(child => typeof child === 'string')
+  const isBlock = textBlocks.has(String(tag))
+  const isInline = inlineTags.has(String(tag))
+
+  let oneLiner = isBlock && hasOnlyTextChildren
+
+  if (!oneLiner && inlineTags.has(String(tag)) && hasOnlyTextChildren) {
+    oneLiner = true
+  }
+  if (tag === 'pre') {
+    oneLiner = true
+  }
+
   const isSelfClose = selfCloseTags.has(String(tag))
 
   // Do not modify context if we are already in html mode
   const revert = !state.context.html && fullHtmlTags.has(String(tag)) ? state.applyContext({ html: true }) : null
 
-  const content = children.map(child => state.one(child, state, node))
-    .join('').trim()
+  const childrenContent = children.map(child => state.one(child, state, node))
+
+  let content = ''
+  let isPrevBlock = true
+  for (let i = 0; i < children.length; i++) {
+    const childContent = childrenContent[i]
+    const child = children[i]
+    const isBlock = blockTags.has(String(child?.[0])) || (!inlineTags.has(String(child?.[0])) && !hasTextSibling)
+    if (child?.[0] === 'in') {
+      console.log('parent', parent, isBlock, child?.[0])
+    }
+    if (i > 0 && !isPrevBlock && isBlock) {
+      content += state.context.blockSeparator
+    }
+    content += childContent
+    isPrevBlock = isBlock
+
+    if (isBlock && i < children.length - 1) {
+      content += state.context.blockSeparator
+    }
+  }
 
   // Revert, only if we modified the context
   if (revert) {
@@ -27,12 +61,15 @@ export function html(node: MinimarkElement, state: State, parent?: MinimarkEleme
     : ''
 
   if (isSelfClose) {
-    return `<${tag}${attrs} />` + (inline ? '' : state.context.blockSeparator)
+    return `<${tag}${attrs} />` + (!parent && !isInline ? state.context.blockSeparator : '')
   }
 
-  return inline
-    ? `<${tag}${attrs}>${content}</${tag}>`
-    : `<${tag}${attrs}>\n${paddNoneHtmlContent(content, state)}\n</${tag}>` + state.context.blockSeparator
+  if (!oneLiner && content) {
+    content = '\n' + paddNoneHtmlContent(content, state) + '\n'
+  }
+
+  return `<${tag}${attrs}>${content}</${tag}>`
+    + (!parent && !isInline ? state.context.blockSeparator : '')
 }
 
 function paddNoneHtmlContent(content: string, state: State) {
@@ -45,20 +82,4 @@ function paddNoneHtmlContent(content: string, state: State) {
     + content
     + (content.trim().endsWith('>') ? '' : '\n')
   )
-}
-
-function cleanup(node: MinimarkElement): MinimarkElement {
-  const [tag, attributes] = node
-
-  if (tag === 'pre') {
-    return [
-      tag,
-      {
-        language: attributes.language,
-      },
-      attributes.code || textContent(node),
-    ] as unknown as MinimarkElement
-  }
-
-  return node
 }

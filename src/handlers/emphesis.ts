@@ -1,6 +1,16 @@
 import type { State, MinimarkElement } from '../types'
-import { textContent } from '../utils'
+import { markdownAttributes } from '../utils'
 
-export function emphesis(node: MinimarkElement, _: State) {
-  return `*${textContent(node)}*`
+export function emphesis(node: MinimarkElement, state: State) {
+  const [_, attrs, ...children] = node
+
+  const content = children.map(child => state.one(child, state))
+    .join('')
+    .trim()
+
+  const attrsString = Object.keys(attrs).length > 0
+    ? markdownAttributes(attrs)
+    : ''
+
+  return `*${content}*${attrsString}`
 }

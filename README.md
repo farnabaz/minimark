@@ -1,6 +1,6 @@
 # minimark
 
-MiniMark is a minimal representation of Abstract Syntax Trees (AST) for Markdown.
+MiniMark is a minimark representation of Abstract Syntax Trees (AST) for Markdown.
 
 Minimark takes advantage of JSON array format to reduce the size of the AST.
 
@@ -50,7 +50,7 @@ yarn add minimark
 import { stringify } from 'minimark/stringify';
 
 const ast = [
-  type: 'minimal',
+  type: 'minimark',
   value: [
     ['h2', { id: 'documentations' }, '🎨 Documentations'],
     ['ul', {}, [
@@ -81,7 +81,7 @@ console.log(stringify(ast));
 import { visit } from 'minimark';
 
 const ast = [
-  type: 'minimal',
+  type: 'minimark',
   value: [
     ['h2', { id: 'documentations' }, '🎨 Documentations'], // ...
   ],
@@ -99,7 +99,7 @@ visit(ast, (node) => node[0] === 'h2', (node) => {
 ```ts
 import { textContent } from 'minimark';
 const ast = [
-  type: 'minimal',
+  type: 'minimark',
   value: [
     ['h2', { id: 'documentations' }, '🎨 Documentations'], // ...
   ],
@@ -116,7 +116,7 @@ console.log(textContent(ast.value[0])); // "🎨 Documentations"
 import { toHast } from 'minimark/hast';
 
 const ast = [
-  type: 'minimal',
+  type: 'minimark',
   value: [
     ['h2', { id: 'documentations' }, '🎨 Documentations'], // ...
   ],
