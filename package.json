@@ -23,8 +23,8 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest watch",
-    "test:types": "tsc --noEmit",
-    "verify": "npm run lint && npm run test",
+    "typecheck": "tsc --noEmit",
+    "verify": "npm run lint && npm run test && npm run typecheck",
     "release": "release-it"
   },
   "devDependencies": {
