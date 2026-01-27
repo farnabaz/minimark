@@ -10,7 +10,7 @@ export function mdc(node: MinimarkElement, state: State) {
   }
 
   const inline = children.every((child: MinimarkNode) => typeof child === 'string')
-  const content = children.map((child: MinimarkNode) => state.one(child, { ...state, nest: (state.nest || 0) + 1 }))
+  const content = children.map((child: MinimarkNode) => state.one(child, { ...state, nodeDepthInTree: (state.nodeDepthInTree || 0) + 1 }))
     .join('').trim()
 
   const attrs = Object.keys(attributes).length > 0
@@ -21,7 +21,7 @@ export function mdc(node: MinimarkElement, state: State) {
     return `[${content}]${attrs}`
   }
 
-  const fence = ':'.repeat((state.nest || 0) + 2)
+  const fence = ':'.repeat((state.nodeDepthInTree || 0) + 2)
 
   let result = `:${tag}${content && `[${content}]`}${attrs}`
 
@@ -35,5 +35,5 @@ export function mdc(node: MinimarkElement, state: State) {
     }
   }
 
-  return indent(result, { level: state.nest || 0 })
+  return indent(result, { level: state.nodeDepthInTree || 0 })
 }

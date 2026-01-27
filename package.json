@@ -23,7 +23,7 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest watch",
-    "test:types": "vue-tsc --noEmit",
+    "test:types": "tsc --noEmit",
     "verify": "npm run lint && npm run test",
     "release": "release-it"
   },
@@ -32,6 +32,7 @@
     "@nuxtjs/mdc": "^0.20.0",
     "@release-it/conventional-changelog": "^10.0.4",
     "@types/js-yaml": "^4.0.9",
+    "@types/node": "^25.0.10",
     "eslint": "^9.39.2",
     "obuild": "^0.4.20",
     "release-it": "^19.2.4",

@@ -48,4 +48,9 @@ export type State = {
   flow: NodeHandler
   one: (node: MinimarkNode, state: State, parent?: MinimarkElement) => string
   applyContext: (edit: Record<string, unknown>) => Record<string, unknown>
+
+  /**
+   * The depth of the node in the tree
+   */
+  nodeDepthInTree?: number
 }

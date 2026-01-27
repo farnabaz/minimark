@@ -1,4 +1,5 @@
-import fs from 'node:fs'
+import fs from 'fs'
+// @ts-expect-error no types for @nuxtjs/mdc/runtime
 import { parseMarkdown } from '@nuxtjs/mdc/runtime'
 import { fromHast } from '../src/hast'
 
