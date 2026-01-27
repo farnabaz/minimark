@@ -1,4 +1,4 @@
-import type { MinimarkNode, MinimarkTree } from './types'
+import type { MinimarkNode, MinimarkTree } from '../types'
 
 export function visit(tree: MinimarkTree, checker: (node: MinimarkNode) => boolean, visitor: (node: MinimarkNode) => MinimarkNode | undefined) {
   function walk(node: MinimarkNode, parent: MinimarkNode | MinimarkNode[], index: number) {
