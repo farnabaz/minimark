@@ -3,6 +3,9 @@ import type { State, MinimarkElement, MinimarkNode, Context } from '../types'
 
 export function one(node: MinimarkNode, state: State, parent?: MinimarkElement) {
   if (typeof node === 'string') {
+    if (state.context.html) {
+      return escapeHtml(node)
+    }
     return node
   }
 
@@ -78,4 +81,16 @@ export const state: State = {
 
     return revert
   },
+}
+
+/**
+ * Escape HTML special characters
+ */
+function escapeHtml(text: string): string {
+  const map: Record<string, string> = {
+    '<': '&lt;',
+    '>': '&gt;',
+    '&amp;': '&',
+  }
+  return text.replace(/[<>]/g, char => map[char])
 }
