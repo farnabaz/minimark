@@ -23,7 +23,7 @@ export function pre(node: MinimarkElement, state: State) {
     : ''
 
   const result = '```' + language + filename + highlights + meta + '\n'
-    + String(node[1]?.code || textContent(node, { decodeUnicodeEntities: true })).trim()
+    + String(node[1]?.code || textContent(node)).trim()
     + '\n```'
 
   return result + state.context.blockSeparator
