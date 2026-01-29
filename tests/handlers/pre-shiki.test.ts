@@ -24,7 +24,7 @@ describe('code handler', () => {
           {
             style: 'color:#E1E4E8',
           },
-          '&#x3C;',
+          '<',
         ],
         [
           'span',
@@ -67,7 +67,7 @@ describe('code handler', () => {
           {
             style: 'color:#E1E4E8',
           },
-          '  &#x3C;',
+          '  <',
         ],
         [
           'span',
@@ -81,7 +81,7 @@ describe('code handler', () => {
           {
             style: 'color:#E1E4E8',
           },
-          '>Title &#x26; Subtitle&#x3C;/',
+          '>Title & Subtitle</',
         ],
         [
           'span',
@@ -103,7 +103,7 @@ describe('code handler', () => {
           {
             style: 'color:#E1E4E8',
           },
-          '  &#x3C;',
+          '  <',
         ],
         [
           'span',
@@ -117,7 +117,7 @@ describe('code handler', () => {
           {
             style: 'color:#E1E4E8',
           },
-          '>Text with "quotes" and \'apostrophes\'&#x3C;/',
+          '>Text with "quotes" and \'apostrophes\'</',
         ],
         [
           'span',
@@ -139,7 +139,7 @@ describe('code handler', () => {
           {
             style: 'color:#E1E4E8',
           },
-          '  &#x3C;',
+          '  <',
         ],
         [
           'span',
@@ -174,14 +174,14 @@ describe('code handler', () => {
           {
             style: 'color:#9ECBFF',
           },
-          '\'XSS &#x3C; > test\'',
+          '\'XSS < > test\'',
         ],
         [
           'span',
           {
             style: 'color:#E1E4E8',
           },
-          ');&#x3C;/',
+          ');</',
         ],
         [
           'span',
@@ -203,7 +203,7 @@ describe('code handler', () => {
           {
             style: 'color:#E1E4E8',
           },
-          '&#x3C;/',
+          '</',
         ],
         [
           'span',
