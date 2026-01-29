@@ -1,5 +1,6 @@
 import type { MinimarkNode } from '../types'
 import { dump } from 'js-yaml'
+import { decodeHTML } from 'entities'
 
 export function indent(text: string, { ignoreFirstLine = false, level = 1 }: { ignoreFirstLine?: boolean, level?: number } = {}) {
   return text.split('\n').map((line, index) => {
@@ -10,13 +11,16 @@ export function indent(text: string, { ignoreFirstLine = false, level = 1 }: { i
   }).join('\n')
 }
 
-export function textContent(node: MinimarkNode): string {
+export function textContent(node: MinimarkNode, options: { decodeUnicodeEntities?: boolean } = {}): string {
   if (typeof node === 'string') {
+    if (options.decodeUnicodeEntities) {
+      return decodeHTML(node)
+    }
     return node as string
   }
   const children = node.slice(2) as MinimarkNode[]
 
-  return children.map(child => textContent(child)).join('')
+  return children.map(child => textContent(child, options)).join('')
 }
 
 export function htmlAttributes(attributes: Record<string, unknown>) {
