@@ -13,4 +13,42 @@ describe('li handler', () => {
     const node: MinimarkElement = ['li', { className: 'task-list-item' }, ['input', { type: 'checkbox', checked: true }], 'Hello']
     expect(li(node, state)).toBe('- [x] Hello\n')
   })
+
+  it('should return valid task list item unchecked', () => {
+    const node: MinimarkElement = [
+      'li',
+      {
+        class: 'task-list-item',
+      },
+      [
+        'input',
+        {
+          'class': 'task-list-item-checkbox',
+          ':disabled': 'true',
+          'type': 'checkbox',
+        },
+      ],
+      ' TODO',
+    ]
+    expect(li(node, state)).toBe('- [ ] TODO\n')
+  })
+  it('should return valid task list item checked', () => {
+    const node: MinimarkElement = [
+      'li',
+      {
+        class: 'task-list-item',
+      },
+      [
+        'input',
+        {
+          'class': 'task-list-item-checkbox',
+          ':checked': 'true',
+          ':disabled': 'true',
+          'type': 'checkbox',
+        },
+      ],
+      ' Done',
+    ]
+    expect(li(node, state)).toBe('- [x] Done\n')
+  })
 })

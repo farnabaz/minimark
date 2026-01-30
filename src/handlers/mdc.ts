@@ -2,7 +2,7 @@ import type { State, MinimarkElement, MinimarkNode } from '../types'
 import { indent, markdownAttributes, markdownYamlAttributes } from '../utils'
 import { html } from './html'
 
-export function mdc(node: MinimarkElement, state: State) {
+export function mdc(node: MinimarkElement, state: State, _parent?: MinimarkElement) {
   const [tag, attributes, ...children] = node
 
   if (tag === 'table') {

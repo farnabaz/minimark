@@ -8,13 +8,13 @@ export function li(node: MinimarkElement, state: State) {
 
   const className = (node[1].className as string) && Array.isArray(node[1].className)
     ? node[1].className.join(' ')
-    : String(node[1].className)
+    : String(node[1].className || node[1].class)
 
   const taskList = className.includes('task-list-item')
 
   if (taskList) {
     const input = children.shift() as MinimarkElement
-    prefix += input[1].checked ? '[x] ' : '[ ] '
+    prefix += input[1].checked || input[1][':checked'] ? '[x] ' : '[ ] '
   }
 
   let result = children.map(child => state.one(child, state)).join('').trim()

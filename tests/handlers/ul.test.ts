@@ -13,4 +13,45 @@ describe('ul handler', () => {
     const node: MinimarkElement = ['ul', {}, ['li', {}, 'hello', ['ul', {}, ['li', {}, 'world']]]]
     expect(ul(node, state)).toBe('- hello\n  - world\n\n')
   })
+
+  it('should return valid task list', () => {
+    const node: MinimarkElement = [
+      'ul',
+      {
+        class: 'contains-task-list',
+      },
+      [
+        'li',
+        {
+          class: 'task-list-item',
+        },
+        [
+          'input',
+          {
+            'class': 'task-list-item-checkbox',
+            ':checked': 'true',
+            ':disabled': 'true',
+            'type': 'checkbox',
+          },
+        ],
+        ' Done',
+      ],
+      [
+        'li',
+        {
+          class: 'task-list-item',
+        },
+        [
+          'input',
+          {
+            'class': 'task-list-item-checkbox',
+            ':disabled': 'true',
+            'type': 'checkbox',
+          },
+        ],
+        ' todo',
+      ],
+    ]
+    expect(ul(node, state)).toBe('- [x] Done\n- [ ] todo\n\n')
+  })
 })
