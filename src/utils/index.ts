@@ -55,6 +55,11 @@ export function markdownAttributes(attributes: Record<string, unknown>) {
       if (key === 'class') {
         return `.${value}`
       }
+
+      if (typeof value === 'object') {
+        return `${key}="${JSON.stringify(value).replace(/"/g, '\\"')}"`
+      }
+
       return `${key}="${value}"`
     })
 

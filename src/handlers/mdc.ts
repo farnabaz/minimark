@@ -23,6 +23,11 @@ export function mdc(node: MinimarkElement, state: State, parent?: MinimarkElemen
     inline = true
   }
 
+  // if component has a text sibling, it is inline
+  if (!inline && parent?.some((child, index) => index > 1 && typeof child === 'string')) {
+    inline = true
+  }
+
   const content = children.map((child: MinimarkNode) => state.one(child, { ...state, nodeDepthInTree: (state.nodeDepthInTree || 0) + 1 }, node))
     .join('').trimEnd()
 
