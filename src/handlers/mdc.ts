@@ -18,6 +18,11 @@ export function mdc(node: MinimarkElement, state: State, parent?: MinimarkElemen
   if (hasObjectAttributes) {
     inline = false
   }
+
+  if (parent && parent?.length > 3 && parent?.every((child, index) => index < 2 || typeof child !== 'string')) {
+    inline = false
+  }
+
   // components inside paragraphs are inline
   if (parent?.[0] === 'p') {
     inline = true

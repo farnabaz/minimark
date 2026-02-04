@@ -69,5 +69,42 @@ export function markdownAttributes(attributes: Record<string, unknown>) {
 }
 
 export function markdownYamlAttributes(attributes: Record<string, unknown>) {
-  return `---\n${dump(attributes).trim()}\n---`
+  const yaml = dump(attributes, {
+    replacer: (_key, value) => {
+      if (value === 'true' || value === 'false') {
+        return Boolean(value)
+      }
+      return value
+    },
+  })
+  return `---\n${unquoteColonKeys(yaml).trim()}\n---`
+}
+
+/**
+ * js-yaml wraps keys with quotes if they start with a colon. This function removes the quotes.
+ * `':test': true` becomes `:test: true`
+ *
+ * Using js-yaml and this function is faster than using other libraries like yaml.
+ */
+function unquoteColonKeys(yamlOutput: string) {
+  const lines = yamlOutput.split('\n')
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i]
+    const trimmed = line.trimStart()
+
+    // Check if line starts with a quote followed by colon
+    if (trimmed[0] === '\'' || trimmed[0] === '"') {
+      const quote = trimmed[0]
+      if (trimmed[1] === ':') {
+        // Find the closing quote
+        const quoteEnd = trimmed.indexOf(quote, 1)
+        if (quoteEnd > 1 && trimmed[quoteEnd + 1] === ':') {
+          // Remove quotes: keep indentation + unquoted key + rest
+          const indent = line.length - trimmed.length
+          lines[i] = ' '.repeat(indent) + trimmed.slice(1, quoteEnd) + trimmed.slice(quoteEnd + 1)
+        }
+      }
+    }
+  }
+  return lines.join('\n')
 }
