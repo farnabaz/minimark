@@ -11,7 +11,7 @@ export function mdc(node: MinimarkElement, state: State, _parent?: MinimarkEleme
 
   const inline = children.every((child: MinimarkNode) => typeof child === 'string')
   const content = children.map((child: MinimarkNode) => state.one(child, { ...state, nodeDepthInTree: (state.nodeDepthInTree || 0) + 1 }, node))
-    .join('').trim()
+    .join('').trimEnd()
 
   const attrs = Object.keys(attributes).length > 0
     ? markdownAttributes(attributes)
