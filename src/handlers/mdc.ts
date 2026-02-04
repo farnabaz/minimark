@@ -35,5 +35,5 @@ export function mdc(node: MinimarkElement, state: State, _parent?: MinimarkEleme
     }
   }
 
-  return indent(result, { level: _parent ? 1 : 0 })
+  return inline ? result : indent(result, { level: _parent ? 1 : 0 })
 }
