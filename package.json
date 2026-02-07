@@ -33,7 +33,7 @@
     "@release-it/conventional-changelog": "^10.0.4",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^25.0.10",
-    "eslint": "^9.39.2",
+    "eslint": "^10.0.0",
     "obuild": "^0.4.20",
     "release-it": "^19.2.4",
     "typescript": "^5.9.3",
