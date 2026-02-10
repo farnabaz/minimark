@@ -28,7 +28,7 @@
     "release": "release-it"
   },
   "devDependencies": {
-    "@nuxt/eslint-config": "^1.14.0",
+    "@nuxt/eslint-config": "^1.15.1",
     "@nuxtjs/mdc": "^0.20.1",
     "@release-it/conventional-changelog": "^10.0.5",
     "@types/js-yaml": "^4.0.9",
