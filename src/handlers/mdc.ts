@@ -44,7 +44,7 @@ export function mdc(node: MinimarkElement, state: State, parent?: MinimarkElemen
 
   const fence = ':'.repeat((state.nodeDepthInTree || 0) + 2)
 
-  let result = `:${tag}${content && `[${content}]`}${attrs}`
+  let result = `:${tag}${content && `[${content}]`}${attrs}` + (!parent ? state.context.blockSeparator : '')
 
   if (!inline) {
     if (attrs.length > 64 || hasObjectAttributes) {
