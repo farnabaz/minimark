@@ -126,19 +126,19 @@ Hello \`world\`
 
   it('should stringify a table with a nested table', () => {
     const tree: MinimarkTree = {
-      "type": "minimark",
-      "value": [
+      type: 'minimark',
+      value: [
         [
-          "alert",
-          { "type": "success" },
-          "✅ Successfully deployed! 🚀"
+          'alert',
+          { type: 'success' },
+          '✅ Successfully deployed! 🚀',
         ],
         [
-          "alert",
-          { "type": "warning" },
-          "⚠️ Please backup your data before proceeding"
-        ]
-      ]
+          'alert',
+          { type: 'warning' },
+          '⚠️ Please backup your data before proceeding',
+        ],
+      ],
     }
     expect(stringify(tree)).toBe(`:alert[✅ Successfully deployed! 🚀]{type="success"}
 
