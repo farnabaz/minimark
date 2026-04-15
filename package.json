@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^1.15.1",
-    "@nuxtjs/mdc": "^0.20.1",
+    "@nuxtjs/mdc": "^0.21.0",
     "@release-it/conventional-changelog": "^10.0.5",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^25.2.2",
